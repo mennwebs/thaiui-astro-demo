@@ -1,0 +1,157 @@
+---
+import { Icon } from 'astro-iconify';
+const nav = [
+  { name: 'หน้าแรก', link: '/' },
+  { name: 'เกี่ยวกับเรา', link: '/about' },
+  { name: 'ตัวอย่างส่วนหัว', link: '/header' },
+  { name: 'ตัวอย่างเนื้อหา', link: '/content' },
+  { name: 'ตัวอย่างส่วนท้าย', link: '/footer' },
+  { name: 'บทความจาก WordPress', link: '/wordpress' },
+  { name: 'เนื้อหาจาก Notion', link: '/notion' },
+  { name: 'ตารางจาก Google Sheet', link: '/googlesheet' },
+];
+---
+
+<input type='checkbox' id='nav-open' aria-label='Toggle Mobile Menu' />
+<div class='th-nav'>
+  <div class='th-wrap'>
+    <label class='nav-toggle' for='nav-open'>
+      <Icon name='menu' height='24' /><span>เมนู</span>
+    </label>
+    <nav>
+      <label class='close' for='nav-open'>
+        <Icon name='close' height='24' /><span>ปิดเมนู</span>
+      </label>
+      <ul>
+        {
+          nav.map((n) => (
+            <li>
+              <a href={n.link} rel='prefetch'>
+                {n.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <label class='bg' for='nav-open'></label>
+    </nav>
+  </div>
+</div>
+<style lang='scss'>
+  .th-nav {
+    z-index: 900;
+    background-color: var(--th-nav-bg);
+    color: var(--th-nav-text);
+  }
+  a {
+    color: var(--th-nav-text);
+    &:hover {
+      color: var(--th-nav-text);
+      opacity: 0.8;
+    }
+  }
+  #nav-open {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: fixed;
+    top: 1.25rem;
+    right: 1rem;
+    color: var(--th-head-text);
+  }
+  nav {
+    visibility: hidden;
+    opacity: 0;
+    width: 280px;
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    right: 0;
+    z-index: 900;
+    box-shadow: var(--th-shadow-2);
+    transform: translateX(100%);
+    background-color: var(--th-nav-bg);
+    transition:
+      transform 0.4s linear,
+      opacity 0.2s linear 0.2s,
+      visibility 0s linear 0.4s;
+    padding: 20px 30px;
+    ul {
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      list-style: none;
+      margin-bottom: 1rem;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .close {
+      padding: 0 0 20px;
+      justify-content: flex-end;
+      align-items: center;
+      display: flex;
+    }
+    .bg {
+      position: absolute;
+      height: 100%;
+      width: 100vw;
+      right: 100%;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  }
+  #nav-open:checked ~ .th-nav nav {
+    transform: translateX(0%);
+    transition-delay: 0s;
+    opacity: 1;
+    visibility: visible;
+    transition-timing-function: cubic-bezier(0, 0.2, 0.25, 1), linear, linear;
+  }
+
+  // FOR DESKTOP
+  @media (min-width: 1024px) {
+    .nav-toggle {
+      display: none;
+    }
+    .th-nav {
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+    }
+    nav {
+      transform: translateX(0%);
+      opacity: 1;
+      visibility: visible;
+      background: none;
+      box-shadow: none;
+      width: unset;
+      position: relative;
+      top: unset;
+      right: unset;
+      height: unset;
+      padding: unset;
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--th-gap);
+      }
+      li {
+        margin-bottom: 0;
+      }
+      .close,
+      label {
+        display: none;
+      }
+    }
+  }
+</style>

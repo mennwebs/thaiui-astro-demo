@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+const res = await fetch('https://plant3.seeddemo.com/wp-json/wp/v2/posts');
+const posts = await res.json();
+const title = 'ไทยยูไอ';
+const description = 'ตัวอย่างเทมเพลตเว็บภาษาไทยในรูปแบบ Astro';
+---
+
+<Layout title={title} description={description}>
+  <h1>ตัวอย่างการนำบทความจาก WordPress มาแสดง</h1>
+  <p>นำเนื้อหาจากเว็บ https://plant3.seeddemo.com มาแสดงดังนี้</p>
+  {
+    posts.map((post) => (
+      <>
+        <h2 set:html={post.title.rendered} />
+        <p set:html={post.excerpt.rendered} />
+        <hr />
+      </>
+    ))
+  }
+</Layout>
