@@ -2,8 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.scss';
-const { title, description, headOverlay, width = false } = Astro.props;
-// width: false, 'narrow', 'wide', 'full'
+const { title, description, bodyclass = '' } = Astro.props;
 ---
 
 <html lang='th'>
@@ -14,19 +13,11 @@ const { title, description, headOverlay, width = false } = Astro.props;
     <meta name='description' content={description} />
     <title>{title}</title>
   </head>
-  <body>
+  <body class={bodyclass}>
     <a class='skip-link _sr' href='#content'>Skip to content - ข้ามไปที่เนื้อหา</a>
-    <Header headOverlay={headOverlay} />
-    <main id='content' class={width && width}>
-      {
-        width === 'full' ? (
-          <slot />
-        ) : (
-          <div class='th-wrap'>
-            <slot />
-          </div>
-        )
-      }
+    <Header />
+    <main id='content' class='th-container'>
+      <slot />
     </main>
     <Footer />
   </body>

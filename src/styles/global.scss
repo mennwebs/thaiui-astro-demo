@@ -18,22 +18,15 @@ h1 {
 }
 main {
   padding-bottom: var(--th-space);
-  &.narrow {
-    font-size: 1.125rem;
-    html.large & {
-      font-size: 1em;
-    }
-    .th-wrap {
-      max-width: var(--th-content-width);
-    }
-    a {
-      text-decoration: underline;
-      text-decoration-style: dashed;
-      text-decoration-thickness: 0.0625em;
-      text-underline-offset: 0.25em;
-      &:hover {
-        text-decoration-style: solid;
-      }
+}
+.th-content {
+  a {
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-decoration-thickness: 0.0625em;
+    text-underline-offset: 0.25em;
+    &:hover {
+      text-decoration-style: solid;
     }
   }
 }

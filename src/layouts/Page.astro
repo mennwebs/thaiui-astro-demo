@@ -3,7 +3,7 @@ import Layout from './Layout.astro';
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={frontmatter.title} description={frontmatter.description} width='narrow'>
+<Layout title={frontmatter.title} description={frontmatter.description} bodyclass='width-sm'>
   <h1>{frontmatter.title}</h1>
   <slot />
 </Layout>

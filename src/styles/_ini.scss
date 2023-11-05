@@ -141,12 +141,15 @@ code {
 }
 
 // LAYOUT
-.th-wrap {
-  max-width: var(--th-wrap-width);
+.th-container {
+  width: 100%;
+  max-width: var(--th-width-lg);
   margin: 0 auto;
-  padding: 0 1rem;
-  @media (min-width: 1024px) {
-    padding: 0 20px;
+  padding: 0 var(--th-gap);
+}
+.width-sm {
+  main.th-container {
+    max-width: var(--th-width-sm);
   }
 }
 .th-sec {
